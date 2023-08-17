@@ -1,0 +1,21 @@
+- name: Create node list for cluster k8s.{{ __cluster_name }}
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: false
+  tags:
+    - always
+  tasks:
+    - name: Login to cluster k8s.{{ __cluster_name }}
+      shell: tsh kube login k8s.{{ __cluster_name }}
+    - name: Ensure right context is used
+      shell: kubectl config use-context teleport-k8s.{{ __cluster_name }}
+    - name: Get nodes list from k8s.{{ __cluster_name }}
+      block:
+        - name: get worker nodes
+          shell: kubectl get node --no-headers | awk '{print $1}'
+          register: cluster_nodes
+        - name: register cluster nodes 
+          add_host:
+            name: '{{ item }}'
+            groups: target
+          with_items: "{{ cluster_nodes.stdout_lines }}"

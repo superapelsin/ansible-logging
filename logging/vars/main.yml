@@ -1,0 +1,9 @@
+---
+# vars file for logging
+_journald_config: /etc/systemd/journald.conf
+_logrotate_config: /etc/logrotate.conf
+_logrotate_include_config_dir: /etc/logrotate.d
+_logrotae_rsyslog_conf_file: rsyslog
+_backup_dir: /root/backup_conf_logging
+_backup_journald_conf: journald.conf.bak
+_backup_logrotate_conf: rsyslog.bak

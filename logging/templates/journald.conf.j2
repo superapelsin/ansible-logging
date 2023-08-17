@@ -1,0 +1,14 @@
+{{ ansible_managed | comment }}
+[Journal]
+{# Persistent journal #}
+{% if journald_persistent | bool %}
+Storage=persistent
+{% endif %}
+{% if journald_max_disk_size | int != 0 %}
+SystemMaxUse={{ journald_max_disk_size }}G
+{% endif %}
+Compress={{ journald_compression | bool | ternary("yes", "no") }}
+{# SyncInterval= #}
+{% if journald_sync_interval | int != 0 %}
+SyncIntervalSec={{ journald_sync_interval }}s
+{% endif %}

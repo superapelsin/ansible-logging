@@ -1,0 +1,25 @@
+- name: Create a backup directory
+  file:
+    owner: root
+    group: root
+    mode: 0755
+    path: '{{ _backup_dir }}'
+    state: directory
+
+- name: Check if orig conf file exist journald
+  stat: 
+    path: '{{ _backup_dir }}/{{ _backup_journald_conf }}'
+  register: journald
+
+- name: Backup orig conf file of journald if file not exist
+  shell: cp {{ _journald_config }} {{ _backup_dir }}/{{ _backup_journald_conf }}
+  when: not journald.stat.exists
+
+- name: Check if orig conf file exist logrotate
+  stat: 
+    path: '{{ _backup_dir }}/{{ _backup_logrotate_conf }}'
+  register: logrotate
+
+- name: Backup orig conf file of logrotate if file not exist
+  shell: cp {{ _logrotate_include_config_dir }}/{{ _logrotae_rsyslog_conf_file }} {{ _backup_dir }}/{{ _backup_logrotate_conf }}
+  when: not logrotate.stat.exists

@@ -1,0 +1,19 @@
+- name: Create a logrotate timer override directory
+  file:
+    owner: root
+    group: root
+    mode: 0755
+    path: /etc/systemd/system/logrotate.timer.d
+    state: directory
+
+- name: Set up logrotate systemd timer
+  ini_file:
+    dest: /etc/systemd/system/logrotate.timer.d/override.conf
+    owner: root
+    group: root
+    mode: 0644
+    section: Timer
+    option: OnCalendar
+    value: '{{ systemd_logrotate_timer }}'
+  notify: 
+    - reload systemd

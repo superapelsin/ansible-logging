@@ -1,0 +1,4 @@
+---
+# handlers file for logging
+- import_tasks: handlers/journald.yml
+- import_tasks: handlers/systemd.yml

@@ -1,0 +1,29 @@
+- name: Check for journald conf backup
+  stat: 
+    path: '{{ _backup_dir }}/{{ _backup_journald_conf }}'
+  register: journald
+
+- name: Check for rsyslog conf backup
+  stat: 
+    path: '{{ _backup_dir }}/{{ _backup_logrotate_conf }}'
+  register: logrotate
+
+- name: Restore orig conf files for journald
+  shell: cp -f {{ _backup_dir }}/{{ _backup_journald_conf }} {{ _journald_config }}
+  when: journald.stat.exists
+
+- name: Restore orig conf files for logrotate 
+  shell: cp -f {{ _backup_dir }}/{{ _backup_logrotate_conf }} {{ _logrotate_include_config_dir }}/{{ _logrotae_rsyslog_conf_file }}
+  when: logrotate.stat.exists
+
+- name: Remove systemd logrotate timer override
+  file:
+    path: /etc/systemd/system/logrotate.timer.d
+    state: absent
+  notify:
+    - reload systemd
+
+- name: Remove backup dir
+  file:
+    path: '{{ _backup_dir }}'
+    state: absent

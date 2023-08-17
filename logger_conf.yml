@@ -1,0 +1,7 @@
+- name: Logger config
+  hosts: target
+  gather_facts: false
+  user: pivovarov.ilya2
+  become: true
+  roles:
+    - logging

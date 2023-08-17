@@ -1,0 +1,5 @@
+- name: Configure node list for cluster k8s.{{ __cluster_name }}
+  import_playbook: get_nodes.yml
+
+- name: Configure logging for cluster k8s.{{ __cluster_name }}
+  import_playbook: logger_conf.yml 

@@ -1,0 +1,31 @@
+{{ ansible_managed | comment }}
+/var/log/syslog
+/var/log/mail.info
+/var/log/mail.warn
+/var/log/mail.err
+/var/log/mail.log
+/var/log/daemon.log
+/var/log/kern.log
+/var/log/auth.log
+/var/log/user.log
+/var/log/lpr.log
+/var/log/cron.log
+/var/log/debug
+/var/log/messages
+{
+    {% if logrotate_keep_files | int != 0 %}
+    rotate {{ logrotate_keep_files }}
+    {% endif %}
+	missingok
+	notifempty
+	compress
+	delaycompress
+	sharedscripts
+	postrotate
+		/usr/lib/rsyslog/rsyslog-rotate
+	endscript
+    {% if logrotate_max_file_size | int != 0 %}
+    size {{ logrotate_max_file_size }}G
+    {% endif %}
+    copytruncate
+}

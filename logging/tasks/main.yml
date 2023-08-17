@@ -1,0 +1,47 @@
+---
+# tasks file for logging
+- name: backup orig config files
+  include_tasks: tasks/backup_configs.yml
+  args:
+    apply:
+      tags: 
+        - backup
+  tags:
+    - backup
+
+- name: copy journald template config file
+  include_tasks: tasks/copy_template_journald.yml
+  args:
+    apply:
+      tags: 
+        - setup
+  tags:
+    - setup
+
+- name: copy logrotate template config file
+  include_tasks: tasks/copy_template_logrotate.yml
+  args:
+    apply:
+      tags: 
+        - setup
+  tags:
+    - setup
+
+- name: configure logrotate systemd timer unit
+  include_tasks: tasks/config_systemd_timer.yml
+  args:
+    apply:
+      tags: 
+        - setup
+  tags:
+    - setup
+
+- name: Restore backup configs and remove logrotate timer override
+  include_tasks: tasks/restore_orig.yml
+  args:
+    apply:
+      tags: 
+        - restore
+  tags:
+    - restore
+    - never

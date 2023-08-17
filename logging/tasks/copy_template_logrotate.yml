@@ -1,0 +1,7 @@
+- name: Copy template to configure logrotate service
+  template:
+    src: logrotate.j2
+    dest: "{{ _logrotate_include_config_dir }}/{{ _logrotae_rsyslog_conf_file }}"
+    owner: root
+    group: root
+    mode: '0644'

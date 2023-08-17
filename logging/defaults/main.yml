@@ -1,0 +1,21 @@
+---
+# defaults file for logging
+journald_persistent: true
+
+# size in Gb
+journald_max_disk_size: 1
+
+#enable compression
+journald_compression: true
+
+# sync time in sec
+journald_sync_interval: 1
+
+#logrotate rotation files count to keep
+logrotate_keep_files: 4
+
+#logrotate max file size in Gb
+logrotate_max_file_size: 1
+
+#logrotate timer spec (in systemd timer format)
+systemd_logrotate_timer: '*:0/5'

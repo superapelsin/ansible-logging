@@ -1,0 +1,9 @@
+- name: Copy template to configure journald service
+  template:
+    src: journald.conf.j2
+    dest: "{{ _journald_config }}"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: 
+    - restart journald service
