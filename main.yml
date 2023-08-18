@@ -1,3 +1,18 @@
+- name: Define cluster and user for configure logging
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: false
+  tags:
+    - always
+  vars_prompt:
+    - name: in__cluster_name
+      prompt: "Enter cluster name k8s."
+      private: false
+  tasks: 
+    - name: Set fact for cluster k8s.{{ in__cluster_name }}
+      set_fact: 
+        __cluster_name: "{{ in__cluster_name }}"
+
 - name: Configure node list for cluster k8s.{{ __cluster_name }}
   import_playbook: get_nodes.yml
 

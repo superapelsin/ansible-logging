@@ -1,4 +1,4 @@
-- name: Create node list for cluster k8s.{{ __cluster_name }}
+- name: Create node list for cluster
   hosts: 127.0.0.1
   connection: local
   gather_facts: false

@@ -6,8 +6,10 @@
     apply:
       tags: 
         - backup
+        - setup
   tags:
     - backup
+    - setup
 
 - name: copy journald template config file
   include_tasks: tasks/copy_template_journald.yml

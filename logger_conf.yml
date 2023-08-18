@@ -1,7 +1,12 @@
+
 - name: Logger config
   hosts: target
   gather_facts: false
-  user: pivovarov.ilya2
   become: true
+  vars_prompt:
+    - name: username
+      prompt: "Enter user for ssh login to cluster node"
+      private: false
+  user: "{{ username }}"
   roles:
     - logging
