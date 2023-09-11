@@ -3,6 +3,14 @@
 Run with 
 ansible-playbook main.yml -t (backup|setup|restore)
 
+### Tags
+
+backup - backup current config files
+
+setup - configure logging and restart services
+
+restore - restore last backup configs and restart services
+
 
 ### Setup ssh.conf
 before running create ssh.cfg in root of this repo with   tsh config > ssh.cfg
