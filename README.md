@@ -15,6 +15,8 @@ restore - restore last backup configs and restart services
 ### Setup ssh.conf
 before running create ssh.cfg in root of this repo with   tsh config > ssh.cfg
 
+sample: 
+
 ```
 # Begin generated Teleport configuration for tp.wb.ru by tsh
 
