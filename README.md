@@ -3,6 +3,8 @@
 Run with 
 ansible-playbook main.yml -t (backup|setup|restore)
 
+TAG IS MANDOTORY TO RUN ROLE
+
 ### Tags
 
 backup - backup current config files
