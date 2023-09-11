@@ -3,7 +3,7 @@
 Run with 
 ansible-playbook main.yml -t (backup|setup|restore)
 
-TAG IS MANDOTORY TO RUN ROLE
+TAG IS MANDATORY TO RUN ROLE
 
 ### Tags
 
